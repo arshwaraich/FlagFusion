@@ -5,51 +5,57 @@ import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
 import { ReactNode, useState } from 'react';
 import s from './Dock.module.scss';
 
-const DockButton = ({ children }: { children?: ReactNode }) => {
-  return (
-    <button className={s.button}>
-      {children}
-    </button>
-  );
-};
-
-const COUNTRIES: { [key: string]: string } = COUNTRIES_LIST;
+const COUNTRIES: {
+  code: string,
+  name: string,
+  flagColorHexCodes: string[]
+}[] = COUNTRIES_LIST.sort((a, b) => a.name > b.name ? 1 : -1);
 
 const Dock = () => {
   const [from, setFrom] = useState('AW');
   const [to, setTo] = useState('PL');
+  const [color, setColor] = useState('#FF0000');
 
   return (
     <div className={s.dock}>
       <select
         value={from}
         onChange={(e) => setFrom(e.target.value)}
-        style={{backgroundImage: `url(/svg/icon/${from}.svg)`}}>
+        style={{ backgroundImage: `url(/svg/icon/${from}.svg)` }}>
         {
-          Object.keys(COUNTRIES)
-          .filter((key) => key!== to)
-          .map((key) => (
-            <option value={key} key={key}>{COUNTRIES[key]}</option>
-          ))
+          COUNTRIES
+            .filter((c) => c.code !== to)
+            .map((c) => (
+              <option value={c.code} key={c.code}>{c.name}</option>
+            ))
         }
       </select>
       <ArrowRightCircleIcon className={s.icon} />
       <select
         value={to}
         onChange={(e) => setTo(e.target.value)}
-        style={{backgroundImage: `url(/svg/icon/${to}.svg)`}}>
+        style={{ backgroundImage: `url(/svg/icon/${to}.svg)` }}>
         {
-          Object.keys(COUNTRIES)
-          .filter((key) => key!== from)
-          .map((key) => (
-            <option value={key} key={key}>{COUNTRIES[key]}</option>
-          ))
+          COUNTRIES
+            .filter((c) => c.code !== from)
+            .map((c) => (
+              <option value={c.code} key={c.code}>{c.name}</option>
+            ))
         }
       </select>
       <SwatchIcon className={s.icon} />
-      <DockButton>
-        <div className={s.flagcolor}/>
-      </DockButton>
+      {
+        COUNTRIES
+          .find(c => c.code === to)?.flagColorHexCodes
+          .map((hex) => (
+            <button
+              className={hex === color ? s.selectedButton : ''}
+              key={hex}
+              onClick={() => setColor(hex)}>
+              <div className={s.flagcolor} style={{ backgroundColor: hex }} />
+            </button>
+          ))
+      }
     </div>
   );
 };
