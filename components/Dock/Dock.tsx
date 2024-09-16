@@ -1,8 +1,9 @@
 "use client";
 
 import COUNTRIES_LIST from '@/public/countries.json';
+import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/20/solid';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import s from './Dock.module.scss';
 
 const COUNTRIES: {
@@ -11,13 +12,26 @@ const COUNTRIES: {
   flagColorHexCodes: string[]
 }[] = COUNTRIES_LIST.sort((a, b) => a.name > b.name ? 1 : -1);
 
+export const Actions = () => {
+  return (
+    <div className={`${s.dock} ${s.dock__right}`}>
+      <button>
+        <ArrowPathIcon className={s.icon} />
+      </button>
+      <button>
+        <ArrowDownTrayIcon className={s.icon} />
+      </button>
+    </div>
+  );
+}
+
 const Dock = () => {
   const [from, setFrom] = useState('AW');
   const [to, setTo] = useState('PL');
   const [color, setColor] = useState('#FF0000');
 
   return (
-    <div className={s.dock}>
+    <div className={`${s.dock} ${s.dock__center}`}>
       <select
         value={from}
         onChange={(e) => setFrom(e.target.value)}
