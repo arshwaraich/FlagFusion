@@ -1,0 +1,45 @@
+.dock {
+  position: fixed;
+  z-index: 1;
+  background: var(--background);
+  border: 2px solid var(--foreground);
+  border-radius: 1000px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  min-width: 4rem;
+  min-height: 4rem;
+  
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .icon {
+    height: 1.5rem;
+    width: auto;
+  }
+
+  .button, select{
+    height: 3rem;
+    width: 3rem;
+    border: 2px solid var(--foreground);
+    border-radius: 1000px;
+    overflow: hidden;
+  }
+
+  select {
+    color: transparent;
+    background-color: var(--foreground);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .flagcolor {
+    height: 100%;
+    width: 100%;
+    border: 2px solid var(--background);
+    border-radius: 1000px;
+  }
+}
