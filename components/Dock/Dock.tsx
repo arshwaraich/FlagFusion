@@ -26,7 +26,9 @@ const Dock = () => {
         onChange={(e) => setFrom(e.target.value)}
         style={{backgroundImage: `url(/svg/icon/${from}.svg)`}}>
         {
-          Object.keys(COUNTRIES).map((key) => (
+          Object.keys(COUNTRIES)
+          .filter((key) => key!== to)
+          .map((key) => (
             <option value={key} key={key}>{COUNTRIES[key]}</option>
           ))
         }
@@ -37,7 +39,9 @@ const Dock = () => {
         onChange={(e) => setTo(e.target.value)}
         style={{backgroundImage: `url(/svg/icon/${to}.svg)`}}>
         {
-          Object.keys(COUNTRIES).map((key) => (
+          Object.keys(COUNTRIES)
+          .filter((key) => key!== from)
+          .map((key) => (
             <option value={key} key={key}>{COUNTRIES[key]}</option>
           ))
         }
