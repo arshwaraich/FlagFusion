@@ -21,7 +21,7 @@
     width: auto;
   }
 
-  .button, select{
+  button, select{
     height: 3rem;
     width: 3rem;
     border: 2px solid var(--foreground);
@@ -36,10 +36,19 @@
     background-repeat: no-repeat;
   }
 
-  .flagcolor {
-    height: 100%;
-    width: 100%;
-    border: 2px solid var(--background);
-    border-radius: 1000px;
+  button {
+    padding: 2px;
+
+    .flagcolor {
+      height: 100%;
+      width: 100%;
+      border-radius: 1000px;
+    }
+
   }
+
+  .selectedButton {
+    border: 2px solid var(--selection) !important;
+  }
+
 }
