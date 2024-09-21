@@ -19,15 +19,18 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
 - ~~Load Flag + dock(s)~~
 - ~~Get accurate colours from SVG~~
 - ~~Enable coloring~~
-- Enable zoom + pan
-- Enable download
-- Enable Reset
-- Fix color overflow
-  - Maybe reduce colors
+  - ~~Fix sections not being colored~~
+- ~~Enable zoom + pan~~
+- ~~Enable download~~
+- ~~Enable Reset~~
+- ~~Fix color overflow~~
+  - ~~Maybe reduce colors~~
 - Mobile View
 - Safari support
 - Change FavIcon
 - Deploy
+- Add Flags
+  - Misc. flags
 
 ## Getting Started
 
