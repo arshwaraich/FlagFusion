@@ -17,11 +17,13 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
 ## ToDo
 
 - ~~Load Flag + dock(s)~~
-- Get accurate colours from SVG
-- Enable coloring
+- ~~Get accurate colours from SVG~~
+- ~~Enable coloring~~
 - Enable zoom + pan
 - Enable download
 - Enable Reset
+- Fix color overflow
+  - Maybe reduce colors
 - Mobile View
 - Safari support
 - Change FavIcon
@@ -55,3 +57,7 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Other resources
+
+- SVGR next.js + typescript [setup](https://react-svgr.com/docs/next/)

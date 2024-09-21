@@ -5,10 +5,15 @@
   background-image: radial-gradient(circle, var(--dark-grey) 1px, transparent 1px);
   background-size: 32px 32px; /* Size of the grid */
   display: flex;
+
+  &__loading {
+    cursor: progress;
+  }
   
   .flag {
     width: 510px;
     margin: auto;
+    border: 1px solid var(--light-grey);
   }
 }
 

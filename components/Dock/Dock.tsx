@@ -1,16 +1,28 @@
 "use client";
 
 import COUNTRIES_LIST from '@/public/countries.json';
+import COLORS_LIST from '@/public/colors.json';
 import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/20/solid';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './Dock.module.scss';
+import { TO } from '@/app/page';
+
+const COLORS: {
+  [key: string]: string[];
+} = COLORS_LIST;
 
 const COUNTRIES: {
   code: string,
   name: string,
   flagColorHexCodes: string[]
-}[] = COUNTRIES_LIST.sort((a, b) => a.name > b.name ? 1 : -1);
+}[] = COUNTRIES_LIST
+  .sort((a, b) => a.name > b.name ? 1 : -1)
+  .map((country) => ({
+    code: country.code,
+    name: country.name,
+    flagColorHexCodes: COLORS[country.code.toLowerCase()]
+  }));
 
 export const Actions = () => {
   return (
@@ -25,10 +37,23 @@ export const Actions = () => {
   );
 }
 
-const Dock = () => {
-  const [from, setFrom] = useState('AW');
-  const [to, setTo] = useState('PL');
-  const [color, setColor] = useState('#FF0000');
+const Dock = ({
+  from,
+  setFrom,
+  color,
+  setColor
+}: {
+  from: string,
+  setFrom: (value: string) => void,
+  color?: string,
+  setColor: (value: string | undefined) => void
+}) => {
+  const [to, setTo] = useState(TO);
+
+  useEffect(() => {
+    setColor(COUNTRIES.find(c => c.code === to)?.flagColorHexCodes[0]);
+  }, [to, setColor]);
+
 
   return (
     <div className={`${s.dock} ${s.dock__center}`}>
@@ -47,7 +72,7 @@ const Dock = () => {
       <ArrowRightCircleIcon className={s.icon} />
       <select
         value={to}
-        onChange={(e) => setTo(e.target.value)}
+        onChange={(e) => { setTo(e.target.value); setColor(undefined) }}
         style={{ backgroundImage: `url(/svg/icon/${to}.svg)` }}>
         {
           COUNTRIES
@@ -61,7 +86,7 @@ const Dock = () => {
       {
         COUNTRIES
           .find(c => c.code === to)?.flagColorHexCodes
-          .map((hex) => (
+          ?.map((hex) => (
             <button
               className={hex === color ? s.selectedButton : ''}
               key={hex}
