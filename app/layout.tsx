@@ -13,7 +13,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// TODO: Change Favicon
 export const metadata: Metadata = {
   title: "Flag Fusion",
   description: "Reimagine any flag in the colours of another flag",
