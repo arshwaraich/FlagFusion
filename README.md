@@ -27,10 +27,9 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
   - ~~Maybe reduce colors~~
 - ~~Mobile View~~
 - ~~Safari support~~
-- Change FavIcon
+- ~~Change FavIcon~~
+- ~~Add Flags~~
 - Deploy
-- Add Flags
-  - Misc. flags
 
 ## Getting Started
 
