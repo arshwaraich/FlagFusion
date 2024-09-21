@@ -19,7 +19,6 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
 - ~~Load Flag + dock(s)~~
 - ~~Get accurate colours from SVG~~
 - ~~Enable coloring~~
-  - ~~Fix sections not being colored~~
 - ~~Enable zoom + pan~~
 - ~~Enable download~~
 - ~~Enable Reset~~
@@ -29,7 +28,10 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
 - ~~Safari support~~
 - ~~Change FavIcon~~
 - ~~Add Flags~~
+- Fix sections not being colored
 - Deploy
+- PNG image downloads
+- Nepal fix
 
 ## Getting Started
 
