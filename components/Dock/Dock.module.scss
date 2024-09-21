@@ -5,9 +5,13 @@
   border: 2px solid var(--foreground);
   border-radius: 1000px;
   padding: 0.5rem;
+
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  max-width: 30rem;
+  overflow-x: scroll;
 
   min-width: 4rem;
   min-height: 4rem;
@@ -16,20 +20,22 @@
   &__center {
     left: 50%;
     transform: translateX(-50%);
-    
+
     .icon {
       height: 1.5rem;
       width: auto;
+      flex-shrink: 0;
     }
-  
-    button, select{
+
+    button,
+    select {
       height: 3rem;
       width: 3rem;
       border: 2px solid var(--foreground);
       border-radius: 1000px;
       overflow: hidden;
     }
-  
+
     select {
       cursor: pointer;
       color: transparent;
@@ -37,21 +43,23 @@
       background-size: cover;
       background-repeat: no-repeat;
     }
-  
+
     button {
       padding: 2px;
-  
+      flex-shrink: 0;
+
       .flagcolor {
         height: 100%;
         width: 100%;
         border-radius: 1000px;
       }
-  
+
     }
-  
+
     .selectedButton {
       border: 2px solid var(--selection) !important;
     }
+
   }
 
   &__right {

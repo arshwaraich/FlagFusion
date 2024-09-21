@@ -1,12 +1,13 @@
 "use client";
 
-import COUNTRIES_LIST from '@/public/countries.json';
+import { TO } from '@/app/page';
 import COLORS_LIST from '@/public/colors.json';
+import COUNTRIES_LIST from '@/public/countries.json';
 import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/20/solid';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { SVG_ID } from '../Board/Board';
 import s from './Dock.module.scss';
-import { TO } from '@/app/page';
 
 const COLORS: {
   [key: string]: string[];
@@ -24,13 +25,49 @@ const COUNTRIES: {
     flagColorHexCodes: COLORS[country.code.toLowerCase()]
   }));
 
-export const Actions = () => {
+export const Actions = ({
+  resetFn
+}: {
+  resetFn: () => void,
+}) => {
+  const downloadSVG = () => {
+    // Get the SVG element (or construct your SVG content as a string)
+    const svgElement = document.getElementById(SVG_ID) as SVGElement;
+
+    if (!svgElement) {
+      console.error('SVG element not found!');
+      return;
+    }
+
+    // Serialize the SVG element to a string
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+
+    // Create a Blob from the SVG data
+    const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'FlagFusion.svg'; // Set the file name for download
+
+    // Append link to body and trigger the download by clicking the link
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up by removing the link element
+    document.body.removeChild(link);
+  };
+
+  const resetFlag = () => {
+    resetFn();
+  }
+
   return (
     <div className={`${s.dock} ${s.dock__right}`}>
-      <button>
+      <button onClick={resetFlag}>
         <ArrowPathIcon className={s.icon} />
       </button>
-      <button>
+      <button onClick={downloadSVG}>
         <ArrowDownTrayIcon className={s.icon} />
       </button>
     </div>
@@ -50,16 +87,11 @@ const Dock = ({
 }) => {
   const [to, setTo] = useState(TO);
 
-  useEffect(() => {
-    setColor(COUNTRIES.find(c => c.code === to)?.flagColorHexCodes[0]);
-  }, [to, setColor]);
-
-
   return (
     <div className={`${s.dock} ${s.dock__center}`}>
       <select
         value={from}
-        onChange={(e) => setFrom(e.target.value)}
+        onChange={(e) => { setFrom(e.target.value); setColor(undefined) }}
         style={{ backgroundImage: `url(/svg/icon/${from}.svg)` }}>
         {
           COUNTRIES
