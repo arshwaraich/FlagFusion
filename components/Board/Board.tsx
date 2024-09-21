@@ -58,15 +58,14 @@ const Board = ({
       let el: SVGElement = target;
       if (el.getAttribute('stroke')) {
         el.setAttribute('stroke', color);
-      } else {
-        if (target.nodeName === "use") {
-          el = (document.getElementById(
-            target.getAttribute('xlink:href')
-            ?.replace('#', '') || target.id
-          ) || target) as SVGElement;
-        }
-        el.setAttribute('fill', color);
       }
+      if (target.nodeName === "use") {
+        el = (document.getElementById(
+          target.getAttribute('xlink:href')
+          ?.replace('#', '') || target.id
+        ) || target) as SVGElement;
+      }
+      el.setAttribute('fill', color);
     }
   }, [color]);
 
