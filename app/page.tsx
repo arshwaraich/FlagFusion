@@ -4,7 +4,7 @@ import Board from "@/components/Board/Board";
 import Dock, { Actions } from "@/components/Dock/Dock";
 import { useState } from "react";
 
-export const [FROM, TO] = ['US', 'CA'];
+const [FROM, TO] = ['US', 'CA'];
 
 export default function Home() {
   const [from, setFrom] = useState<string>(FROM);
