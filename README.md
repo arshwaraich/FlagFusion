@@ -30,7 +30,6 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
 - ~~Add Flags~~
 - ~~PNG image downloads~~
 - Deploy
-- Fix sections not being colored
 
 ## Getting Started
 
