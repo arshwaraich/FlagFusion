@@ -28,10 +28,9 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
 - ~~Safari support~~
 - ~~Change FavIcon~~
 - ~~Add Flags~~
-- Fix sections not being colored
+- ~~PNG image downloads~~
 - Deploy
-- PNG image downloads
-- Nepal fix
+- Fix sections not being colored
 
 ## Getting Started
 
