@@ -29,6 +29,7 @@ const nextConfig = {
   },
 
   // ...other config
+  output: 'export'
 };
 
 export default nextConfig;
