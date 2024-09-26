@@ -1,11 +1,9 @@
 "use client";
 
-import { TO } from '@/app/page';
 import COLORS_LIST from '@/public/colors.json';
 import COUNTRIES_LIST from '@/public/countries.json';
 import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/20/solid';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
 import { SVG_ID } from '../Board/Board';
 import s from './Dock.module.scss';
 
@@ -26,13 +24,17 @@ const COUNTRIES: {
   }));
 
 export const Actions = ({
+  from,
+  to,
   resetFn
 }: {
+  from: string,
+  to: string,
   resetFn: () => void,
 }) => {
   const downloadSVG = () => {
     // Get the SVG element (or construct your SVG content as a string)
-    const svgElement = document.getElementById(SVG_ID) as SVGElement;
+    const svgElement = document.getElementById(SVG_ID);
 
     if (!svgElement) {
       console.error('SVG element not found!');
@@ -48,7 +50,11 @@ export const Actions = ({
     // Create a temporary link element
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'FlagFusion.svg'; // Set the file name for download
+    
+    // Set the file name for download
+    const fromName = COUNTRIES.find((country) => country.code === from)?.name;
+    const toName  = COUNTRIES.find((country) => country.code === to)?.name;
+    link.download = (fromName && toName) ? `${fromName} + ${toName}.svg` : 'FlagFusion.svg';
 
     // Append link to body and trigger the download by clicking the link
     document.body.appendChild(link);
@@ -77,16 +83,18 @@ export const Actions = ({
 const Dock = ({
   from,
   setFrom,
+  to,
+  setTo,
   color,
   setColor
 }: {
   from: string,
   setFrom: (value: string) => void,
+  to: string,
+  setTo: (value: string) => void,
   color?: string,
   setColor: (value: string | undefined) => void
 }) => {
-  const [to, setTo] = useState(TO);
-
   return (
     <div className={`${s.dock} ${s.dock__center}`}>
       <select
