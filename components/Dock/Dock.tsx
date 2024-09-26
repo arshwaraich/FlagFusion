@@ -116,7 +116,7 @@ const Dock = ({
       <select
         value={from}
         onChange={(e) => { setFrom(e.target.value); setColor(undefined) }}
-        style={{ backgroundImage: `url(/svg/icon/${from.toLowerCase()}.svg)` }}>
+        style={{ backgroundImage: `url(./svg/icon/${from.toLowerCase()}.svg)` }}>
         {
           COUNTRIES
             .filter((c) => c.code !== to)
@@ -129,7 +129,7 @@ const Dock = ({
       <select
         value={to}
         onChange={(e) => { setTo(e.target.value); setColor(undefined) }}
-        style={{ backgroundImage: `url(/svg/icon/${to.toLowerCase()}.svg)` }}>
+        style={{ backgroundImage: `url(./svg/icon/${to.toLowerCase()}.svg)` }}>
         {
           COUNTRIES
             .filter((c) => c.code !== from)
