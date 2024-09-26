@@ -1,6 +1,8 @@
 # FlagFusion
 FlagFusion is a tool to reimagine any flag in the colours of another flag
 
+<img width="1125" alt="Screenshot 2024-09-25 at 10 18 01 PM" src="https://github.com/user-attachments/assets/3daa79e8-d107-4e6b-b744-397c9d0ebf94">
+
 
 ## Features
 
