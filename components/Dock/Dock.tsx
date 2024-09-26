@@ -50,7 +50,7 @@ export const Actions = ({
     // Create a temporary link element
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    
+
     // Set the file name for download
     const fileName = (from && to) ? `${from} + ${to}` : 'FlagFusion';
     link.download = `${fileName}.svg`;
@@ -65,12 +65,19 @@ export const Actions = ({
     // PNG download
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
-    
+
     const img = new Image();
     img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx?.drawImage(img, 0, 0);
+      // Calculate the new dimensions
+      const newWidth = Math.max(img.width, 1000);
+      const newHeight = img.height * (newWidth / img.width);
+
+      // Set canvas dimensions
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+
+      // Draw the image onto the canvas, scaling if necessary
+      ctx?.drawImage(img, 0, 0, newWidth, newHeight);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.download = `${fileName}.png`;
