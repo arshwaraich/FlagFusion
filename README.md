@@ -16,23 +16,6 @@ FlagFusion is a tool to reimagine any flag in the colours of another flag
   - PNG
   - SVG
 
-## ToDo
-
-- ~~Load Flag + dock(s)~~
-- ~~Get accurate colours from SVG~~
-- ~~Enable coloring~~
-- ~~Enable zoom + pan~~
-- ~~Enable download~~
-- ~~Enable Reset~~
-- ~~Fix color overflow~~
-  - ~~Maybe reduce colors~~
-- ~~Mobile View~~
-- ~~Safari support~~
-- ~~Change FavIcon~~
-- ~~Add Flags~~
-- ~~PNG image downloads~~
-- Deploy
-
 ## Getting Started
 
 First, run the development server:
