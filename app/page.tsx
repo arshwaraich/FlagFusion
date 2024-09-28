@@ -28,7 +28,7 @@ export default function Home() {
       <Actions
         from={from}
         to={to}
-        resetFn={() => setReset((i) => !i)}/>
+        resetFn={() => {setReset((i) => !i); setColor(undefined);}}/>
     </>
   );
 }
