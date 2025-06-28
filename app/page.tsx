@@ -1,6 +1,7 @@
 "use client";
 
 import Board from "@/components/Board/Board";
+import Cart from "@/components/Cart/Cart";
 import Dock, { Actions } from "@/components/Dock/Dock";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ export default function Home() {
   const [to, setTo] = useState<string>(TO);
   const [color, setColor] = useState<string>();
   const [reset, setReset] = useState<boolean>(false);
+  const [showCart, setShowCart] = useState<boolean>(true);
 
   return (
     <>
@@ -28,7 +30,14 @@ export default function Home() {
       <Actions
         from={from}
         to={to}
-        resetFn={() => {setReset((i) => !i); setColor(undefined);}}/>
+        setShowCart={setShowCart}
+        resetFn={() => { setReset((i) => !i); setColor(undefined); }} />
+      {
+        showCart &&
+        <Cart
+          setShowCart={setShowCart}
+        />
+      }
     </>
   );
 }

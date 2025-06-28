@@ -3,6 +3,7 @@
 import COLORS_LIST from '@/public/colors.json';
 import COUNTRIES_LIST from '@/public/countries.json';
 import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/20/solid';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
 import { SVG_ID } from '../Board/Board';
 import s from './Dock.module.scss';
@@ -26,10 +27,12 @@ const COUNTRIES: {
 export const Actions = ({
   from,
   to,
+  setShowCart,
   resetFn
 }: {
   from: string,
   to: string,
+  setShowCart: (value: boolean) => void,
   resetFn: () => void,
 }) => {
   const downloadSVG = () => {
@@ -98,6 +101,9 @@ export const Actions = ({
       </button>
       <button onClick={downloadSVG}>
         <ArrowDownTrayIcon className={s.icon} />
+      </button>
+      <button onClick={() => setShowCart(true)}>
+        <ShoppingCartIcon className={s.icon} />
       </button>
     </div>
   );
