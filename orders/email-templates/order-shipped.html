@@ -1,0 +1,89 @@
+<!-- Order Shipped Email Template -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Your FlagFusion Order Has Shipped</title>
+  <style>
+    :root {
+      --background: #ffffff;
+      --foreground: #393939;
+      --light-grey: #f5f5f5;
+      --light-highlight: #f5f5f5;
+      --dark-highlight: #1a1a1a;
+      --dark-grey: #d9d9d9;
+      --selection: #418FDE;
+    }
+    body {
+      background: var(--background);
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--foreground);
+      /* Dotted background */
+      background-image: radial-gradient(circle, var(--dark-grey) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .container {
+      background: var(--background);
+      max-width: 480px;
+      margin: 40px auto;
+      border-radius: 18px;
+      border: 2px solid var(--light-grey);
+      padding: 32px 28px;
+      color: var(--foreground);
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5em;
+      color: var(--foreground);
+      font-family: 'American Typewriter', serif;
+    }
+    p {
+      font-size: 1.1rem;
+      margin: 1em 0;
+    }
+    .button {
+      display: inline-block;
+      background: var(--foreground);
+      color: var(--background);
+      border-radius: 1000px;
+      padding: 0.7em 2em;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1.5em 0 1em 0;
+      border: 2px solid var(--foreground);
+      font-family: Arial, Helvetica, sans-serif;
+      transition: background 0.2s;
+    }
+    .button:hover {
+      background: var(--dark-highlight);
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--light-grey);
+      margin: 2em 0;
+    }
+    a {
+      color: var(--selection);
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 18px 6vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your flag is on its way!</h2>
+    <p>Hi {{customer_name}},</p>
+    <p>Your order <b>#{{order_id}}</b> has shipped. Please note that delivery times may vary depending on your location. If you have any questions, do not hesitate to contact us.</p>
+    <p>Thank you for supporting <a href="https://flagfusion.ca" style="color:var(--selection);text-decoration:none;font-weight:bold;">FlagFusion.ca</a>!</p>
+    <a class="button" href="mailto:orders@flagfusion.ca">Contact Support</a>
+    <hr>
+    <p style="font-size:0.95em;color:#888;">Questions? Reply to this email or contact <a href="mailto:orders@flagfusion.ca">orders@flagfusion.ca</a>.</p>
+    <p style="font-size:1.1em;font-family:'American Typewriter',serif;">FlagFusion Team</p>
+  </div>
+</body>
+</html>
