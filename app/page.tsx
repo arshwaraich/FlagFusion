@@ -3,6 +3,7 @@
 import Board from "@/components/Board/Board";
 import Cart from "@/components/Cart/Cart";
 import Dock, { Actions } from "@/components/Dock/Dock";
+import { StripeOutcomePopups } from "@/components/StripeOutcome/StripeOutcomePopups";
 import { useState } from "react";
 
 const [FROM, TO] = ['US', 'CA'];
@@ -12,10 +13,11 @@ export default function Home() {
   const [to, setTo] = useState<string>(TO);
   const [color, setColor] = useState<string>();
   const [reset, setReset] = useState<boolean>(false);
-  const [showCart, setShowCart] = useState<boolean>(true);
+  const [showCart, setShowCart] = useState<boolean>(false);
 
   return (
     <>
+      <StripeOutcomePopups />
       <Board
         from={from}
         reset={reset}
