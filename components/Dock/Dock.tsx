@@ -102,9 +102,12 @@ export const Actions = ({
       <button onClick={downloadSVG}>
         <ArrowDownTrayIcon className={s.icon} />
       </button>
-      <button onClick={() => setShowCart(true)}>
-        <ShoppingCartIcon className={s.icon} />
-      </button>
+      {
+        false &&
+        <button onClick={() => setShowCart(true)}>
+          <ShoppingCartIcon className={s.icon} />
+        </button>
+      }
     </div>
   );
 }
