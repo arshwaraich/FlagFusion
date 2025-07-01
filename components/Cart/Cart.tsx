@@ -50,7 +50,7 @@ const Cart = ({
           setError('Failed to redirect to payment.');
           setLoading(false);
         }
-      } catch (e: any) {
+      } catch (e) {
         setError('Failed to place an order, please try again.');
         setLoading(false);
       }
