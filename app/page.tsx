@@ -1,7 +1,9 @@
 "use client";
 
 import Board from "@/components/Board/Board";
+import Cart from "@/components/Cart/Cart";
 import Dock, { Actions } from "@/components/Dock/Dock";
+import { StripeOutcomePopups } from "@/components/StripeOutcome/StripeOutcomePopups";
 import { useState } from "react";
 
 const [FROM, TO] = ['US', 'CA'];
@@ -11,9 +13,11 @@ export default function Home() {
   const [to, setTo] = useState<string>(TO);
   const [color, setColor] = useState<string>();
   const [reset, setReset] = useState<boolean>(false);
+  const [showCart, setShowCart] = useState<boolean>(false);
 
   return (
     <>
+      <StripeOutcomePopups />
       <Board
         from={from}
         reset={reset}
@@ -28,7 +32,14 @@ export default function Home() {
       <Actions
         from={from}
         to={to}
-        resetFn={() => {setReset((i) => !i); setColor(undefined);}}/>
+        setShowCart={setShowCart}
+        resetFn={() => { setReset((i) => !i); setColor(undefined); }} />
+      {
+        showCart &&
+        <Cart
+          setShowCart={setShowCart}
+        />
+      }
     </>
   );
 }
