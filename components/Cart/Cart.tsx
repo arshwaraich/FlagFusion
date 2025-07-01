@@ -3,6 +3,7 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import s from "./Cart.module.scss";
 import { useState } from "react";
+import { config } from '../../config';
 
 const Cart = ({
   setShowCart,
@@ -14,8 +15,6 @@ const Cart = ({
   const handleOrder = async () => {
     setError(null);
     setLoading(true);
-    // Generate unique orderId
-    const orderId = crypto.randomUUID();
     // Get the SVG element
     const svgElement = document.getElementById('color-change-svg');
     if (!svgElement) {
@@ -36,21 +35,15 @@ const Cart = ({
       canvas.height = newHeight;
       ctx?.drawImage(img, 0, 0, newWidth, newHeight);
       const pngDataUrl = canvas.toDataURL('image/png');
-      // POST to API
+      // POST to API (send only png)
       try {
-        await fetch('/api/order', {
+        const orderRes = await fetch(`${config.API_BASE_URL}/functions/v1/order`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ orderId, png: pngDataUrl })
+          body: JSON.stringify({ png: pngDataUrl })
         });
-        // Create Stripe Checkout session
-        const checkoutRes = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ orderId })
-        });
-        if (!checkoutRes.ok) throw new Error('Checkout session failed');
-        const { url } = await checkoutRes.json();
+        if (!orderRes.ok) throw new Error('Order creation failed');
+        const { url } = await orderRes.json();
         if (url) {
           window.location.href = url;
         } else {
