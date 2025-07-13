@@ -41,7 +41,7 @@ export const Actions = ({
 
   useEffect(() => {
     // Expose a function to toggle the feature flag from the console
-    (window as any).__enableCartButton = () => setShowCartButton(true);
+    window.__enableCartButton = () => setShowCartButton(true);
   }, [showCartButton]);
 
   const downloadSVG = () => {
@@ -181,3 +181,10 @@ const Dock = ({
 };
 
 export default Dock;
+
+// Extend the Window interface to include __enableCartButton
+declare global {
+  interface Window {
+    __enableCartButton?: () => void;
+  }
+}
