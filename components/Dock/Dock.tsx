@@ -7,7 +7,7 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
 import { SVG_ID } from '../Board/Board';
 import s from './Dock.module.scss';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const COLORS: {
   [key: string]: string[];
