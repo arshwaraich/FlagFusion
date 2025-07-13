@@ -39,7 +39,10 @@ const Cart = ({
       try {
         const orderRes = await fetch(`${config.API_BASE_URL}/functions/v1/order`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Authorization': `Bearer ${config.API_KEY}`,
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({ png: pngDataUrl })
         });
         if (!orderRes.ok) throw new Error('Order creation failed');
