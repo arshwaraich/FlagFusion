@@ -7,6 +7,7 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { ArrowRightCircleIcon, SwatchIcon } from '@heroicons/react/24/solid';
 import { SVG_ID } from '../Board/Board';
 import s from './Dock.module.scss';
+import React, { useEffect, useState } from 'react';
 
 const COLORS: {
   [key: string]: string[];
@@ -35,6 +36,14 @@ export const Actions = ({
   setShowCart: (value: boolean) => void,
   resetFn: () => void,
 }) => {
+  // Feature flag for showing the cart button
+  const [showCartButton, setShowCartButton] = useState(false);
+
+  useEffect(() => {
+    // Expose a function to toggle the feature flag from the console
+    window.__enableCartButton = () => setShowCartButton(true);
+  }, [showCartButton]);
+
   const downloadSVG = () => {
     // Get the SVG element (or construct your SVG content as a string)
     const svgElement = document.getElementById(SVG_ID);
@@ -103,7 +112,7 @@ export const Actions = ({
         <ArrowDownTrayIcon className={s.icon} />
       </button>
       {
-        false &&
+        showCartButton &&
         <button onClick={() => setShowCart(true)}>
           <ShoppingCartIcon className={s.icon} />
         </button>
@@ -172,3 +181,10 @@ const Dock = ({
 };
 
 export default Dock;
+
+// Extend the Window interface to include __enableCartButton
+declare global {
+  interface Window {
+    __enableCartButton?: () => void;
+  }
+}
