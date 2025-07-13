@@ -84,6 +84,11 @@ Deno.serve(async (req) => {
       metadata: {
         order_id: orderId,
       },
+      payment_intent_data: {
+        metadata: {
+          order_id: orderId,
+        },
+      },
       success_url: 'https://flagfusion.ca/success',
       cancel_url: 'https://flagfusion.ca/failure',
       custom_text: {
