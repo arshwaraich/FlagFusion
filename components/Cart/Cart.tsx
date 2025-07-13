@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import s from "./Cart.module.scss";
 import { createClient } from "@supabase/supabase-js";
+import { SVG_ID } from "../Board/Board";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || '',
@@ -20,14 +21,19 @@ const Cart = ({
     setError(null);
     setLoading(true);
     // Get the SVG element
-    const svgElement = document.getElementById('color-change-svg');
+    const svgElement = document.getElementById(SVG_ID);
     if (!svgElement) {
       setError('Flag not found!');
       setLoading(false);
       return;
     }
-    // Serialize SVG
+    // Remove scale before serializing ---
+    const prevTransform = svgElement.style.transform;
+    svgElement.style.transform = '';
+    // Serialize SVG at original scale
     const svgData = new XMLSerializer().serializeToString(svgElement);
+    // Restore transform
+    svgElement.style.transform = prevTransform;
     // Create PNG from SVG
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');

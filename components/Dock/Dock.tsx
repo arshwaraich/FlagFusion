@@ -45,8 +45,15 @@ export const Actions = ({
       return;
     }
 
+    // Remove scale before serializing
+    const prevTransform = svgElement.style.transform;
+    svgElement.style.transform = '';
+
     // Serialize the SVG element to a string
     const svgData = new XMLSerializer().serializeToString(svgElement);
+
+    // Restore the transform style
+    svgElement.style.transform = prevTransform;
 
     // Create a Blob from the SVG data
     const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
