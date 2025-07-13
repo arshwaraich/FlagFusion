@@ -1,9 +1,13 @@
 "use client";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import s from "./Cart.module.scss";
 import { useState } from "react";
-import { config } from '../../config';
+import s from "./Cart.module.scss";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
 
 const Cart = ({
   setShowCart,
@@ -36,26 +40,23 @@ const Cart = ({
       ctx?.drawImage(img, 0, 0, newWidth, newHeight);
       const pngDataUrl = canvas.toDataURL('image/png');
       // POST to API (send only png)
-      try {
-        const orderRes = await fetch(`${config.API_BASE_URL}/functions/v1/order`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${config.API_KEY}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ png: pngDataUrl })
-        });
-        if (!orderRes.ok) throw new Error('Order creation failed');
-        const { url } = await orderRes.json();
-        if (url) {
-          window.location.href = url;
-        } else {
-          setError('Failed to redirect to payment.');
-          setLoading(false);
-        }
-      } catch (e) {
+
+      const { data, error } = await supabase.functions.invoke('order', {
+        body: JSON.stringify({ png: pngDataUrl }),
+      });
+
+      if (error) {
         setError('Failed to place an order, please try again.');
         setLoading(false);
+        return;
+      }
+
+      const { url } = JSON.parse(data) as { url: string };
+      if (!url) {
+        setError('Failed to redirect to payment.');
+        setLoading(false);
+      } else {
+        window.location.href = url;
       }
     };
     img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
