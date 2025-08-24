@@ -7,11 +7,13 @@ export const SVG_ID = 'color-change-svg';
 const Board = ({
   reset,
   from,
-  color
+  color,
+  onFlagInteraction
 }: {
   reset: boolean,
   from: string,
-  color?: string
+  color?: string,
+  onFlagInteraction?: () => void
 }) => {
   const [SvgComponent, setSvgComponent] = useState<React.ComponentType<ComponentProps<'svg'>>>();
   const [scale, setScale] = useState(1);  // State to track zoom level
@@ -66,8 +68,11 @@ const Board = ({
         ) || target) as SVGElement;
       }
       el.setAttribute('fill', color);
+      
+      // Trigger flag interaction callback on first touch
+      onFlagInteraction?.();
     }
-  }, [color]);
+  }, [color, onFlagInteraction]);
 
   useEffect(() => {
     const svg = document.getElementById(SVG_ID);
