@@ -29,11 +29,13 @@ export const Actions = ({
   from,
   to,
   setShowCart,
+  showBadge,
   resetFn
 }: {
   from: string,
   to: string,
   setShowCart: (value: boolean) => void,
+  showBadge?: boolean,
   resetFn: () => void,
 }) => {
   const downloadSVG = () => {
@@ -110,8 +112,9 @@ export const Actions = ({
       <button onClick={downloadSVG}>
         <ArrowDownTrayIcon className={s.icon} />
       </button>
-      <button onClick={() => setShowCart(true)}>
+      <button onClick={() => setShowCart(true)} className={s.cartButton}>
         <ShoppingCartIcon className={s.icon} />
+        {showBadge && <span className={s.badge}></span>}
       </button>
     </div>
   );
