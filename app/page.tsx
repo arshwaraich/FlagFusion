@@ -14,6 +14,7 @@ export default function Home() {
   const [color, setColor] = useState<string>();
   const [reset, setReset] = useState<boolean>(false);
   const [showCart, setShowCart] = useState<boolean>(false);
+  const [hasInteractedWithFlag, setHasInteractedWithFlag] = useState<boolean>(false);
 
   return (
     <>
@@ -21,7 +22,8 @@ export default function Home() {
       <Board
         from={from}
         reset={reset}
-        color={color} />
+        color={color}
+        onFlagInteraction={() => setHasInteractedWithFlag(true)} />
       <Dock
         from={from}
         setFrom={setFrom}
@@ -33,6 +35,7 @@ export default function Home() {
         from={from}
         to={to}
         setShowCart={setShowCart}
+        showBadge={hasInteractedWithFlag}
         resetFn={() => { setReset((i) => !i); setColor(undefined); }} />
       {
         showCart &&
